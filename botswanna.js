@@ -25,34 +25,14 @@ Vue.component('Bubble', {
 })
 
 const Botswanna = Vue.extend({
+  props: {
+    initBubbles: Array,
+  },
   data: function() {
     return { 
       message: 'default',
       callback: '',
-      bubbles: [
-        { 
-          type: 'buttons', 
-          data: {
-            buttons: [
-              { 
-                title: 'Learn Vue', 
-                value: 'Vue' 
-              },
-              { 
-                title: 'Learn React', 
-                value: 'React' 
-              }
-            ]
-          }
-        },
-        { 
-          type: 'text',
-          data: {
-            content: 'Build something awesome',
-            bot: false 
-          }
-        }
-      ]
+      bubbles: this.initBubbles,
     };
   },
   methods: {
