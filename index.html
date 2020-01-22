@@ -1,0 +1,23 @@
+<head>
+  <!-- Load Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex"></script>
+</head>
+<body>
+  <!-- Add Botswanna container -->
+  <div id="botswanna">
+    <Bubble
+      v-for="(bubble, index) in bubbles"
+      :type="bubble.type"
+      :data="bubble.data"
+      :key="index"
+      :index="index"
+      @button-click="_buttonClick"
+    />
+    <p>{{ message }}</p>
+    <input v-model="message" type="text" placeholder="test"/>
+  </div>
+
+  <!-- Load our Botswanna react component -->
+  <script src="botswanna.js"></script>
+</body>
