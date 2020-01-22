@@ -24,35 +24,36 @@ Vue.component('Bubble', {
   `
 })
 
-const Botswanna = new Vue({
-  el: '#botswanna',
-  data: { 
-    message: 'default',
-    callback: function(){},
-    bubbles: [
-      { 
-        type: 'buttons', 
-        data: {
-          buttons: [
-            { 
-              title: 'Learn Vue', 
-              value: 'Vue' 
-            },
-            { 
-              title: 'Learn React', 
-              value: 'React' 
-            }
-          ]
+const Botswanna = Vue.extend({
+  data: function() {
+    return { 
+      message: 'default',
+      callback: '',
+      bubbles: [
+        { 
+          type: 'buttons', 
+          data: {
+            buttons: [
+              { 
+                title: 'Learn Vue', 
+                value: 'Vue' 
+              },
+              { 
+                title: 'Learn React', 
+                value: 'React' 
+              }
+            ]
+          }
+        },
+        { 
+          type: 'text',
+          data: {
+            content: 'Build something awesome',
+            bot: false 
+          }
         }
-      },
-      { 
-        type: 'text',
-        data: {
-          content: 'Build something awesome',
-          bot: false 
-        }
-      }
-    ]
+      ]
+    };
   },
   methods: {
     async _onButtonClick(eventObject) {
@@ -93,3 +94,7 @@ const Botswanna = new Vue({
     }
   }
 })
+
+module.exports = {
+  Botswanna,
+}

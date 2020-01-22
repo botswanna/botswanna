@@ -24,15 +24,15 @@
 
   <!-- Load our Botswanna react component -->
   <script src="botswanna.js"></script>
-  <!-- <script>
-    const botswanna = new Botswanna()
+  <script>
+    const botswanna = new Botswanna().$mount('#botswanna')
     botswanna.listen(({value, trigger}) => console.log(value, trigger, 'callback'))
-    botswanna.sendMessage({ 
-      type: 'text', 
-      data: {
+    botswanna.sendMessage(
+      'text', 
+      {
         content: 'Learn JavaScript',
-        bot: true
-      }
-    })
-  </script> -->
+        bot: true,
+      },
+    )
+  </script>
 </body>
