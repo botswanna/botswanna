@@ -6,18 +6,33 @@
 <body>
   <!-- Add Botswanna container -->
   <div id="botswanna">
+    <p>{{ message }}</p>
+    <input 
+      v-model="message" 
+      type="text"
+      v-on:keyup.enter="_onInputSubmit"
+    />
     <Bubble
       v-for="(bubble, index) in bubbles"
       :type="bubble.type"
       :data="bubble.data"
       :key="index"
       :index="index"
-      @button-click="_buttonClick"
+      @button-click="_onButtonClick"
     />
-    <p>{{ message }}</p>
-    <input v-model="message" type="text" placeholder="test"/>
   </div>
 
   <!-- Load our Botswanna react component -->
   <script src="botswanna.js"></script>
+  <!-- <script>
+    const botswanna = new Botswanna()
+    botswanna.listen(({value, trigger}) => console.log(value, trigger, 'callback'))
+    botswanna.sendMessage({ 
+      type: 'text', 
+      data: {
+        content: 'Learn JavaScript',
+        bot: true
+      }
+    })
+  </script> -->
 </body>

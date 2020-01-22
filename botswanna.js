@@ -28,14 +28,8 @@ const Botswanna = new Vue({
   el: '#botswanna',
   data: { 
     message: 'default',
+    callback: function(){},
     bubbles: [
-      { 
-        type: 'text', 
-        data: {
-          content: 'Learn JavaScript',
-          bot: true
-        }
-      },
       { 
         type: 'buttons', 
         data: {
@@ -61,25 +55,41 @@ const Botswanna = new Vue({
     ]
   },
   methods: {
-    _buttonClick(eventObject) {
+    async _onButtonClick(eventObject) {
       const { value, index } = eventObject
       const data = {
         content: value,
         bot: false
       }
       const type = 'text'
-
-      this.remove(index)
-      this.add(type, data)
+      this.removeMessage(index)
+      this.sendMessage(type, data)
+      this.callback({ value, trigger: 'button' })
     },
-    remove(index) {
+    async _onInputSubmit() {
+      const value = this.message
+      const data = {
+        content: value,
+        bot: false
+      }
+      const type = 'text'
+      this.sendMessage(type, data)
+      this.callback({ value, trigger: 'text' })
+
+      // Delete value from input
+      this.message = ''
+    },
+    removeMessage(index) {
       // Checking to ensure that remove acts within range of this.bubbles
       // Splice 1 Bubble element out in the array
       this.bubbles.splice(index, 1)
     },
-    add(type, data) {
+    sendMessage(type, data) {
       // Validate type and data
       this.bubbles.push({ type, data })
     },
+    listen(callback) {
+      this.callback = callback
+    }
   }
 })
