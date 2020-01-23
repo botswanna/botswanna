@@ -6,12 +6,6 @@
 <body>
   <!-- Add Botswanna container -->
   <div id="botswanna">
-    <p>{{ message }}</p>
-    <input 
-      v-model="message" 
-      type="text"
-      v-on:keyup.enter="_onInputSubmit"
-    />
     <Bubble
       v-for="(bubble, index) in bubbles"
       :type="bubble.type"
@@ -19,7 +13,12 @@
       :key="index"
       :index="index"
       @button-click="_onButtonClick"
-    />
+    ></Bubble>
+    <input 
+      v-model="message" 
+      type="text"
+      v-on:keyup.enter="_onInputSubmit"
+    ></input>
   </div>
 
   <!-- Load our Botswanna react component -->
