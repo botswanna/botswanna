@@ -72,7 +72,7 @@ const Botswanna = Vue.extend({
     listen(callback) {
       this.callback = callback
     }
-  }
+  },
 })
 
 module.exports = {

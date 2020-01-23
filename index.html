@@ -1,24 +1,32 @@
 <head>
+  <link rel="stylesheet" href="assets/css/style.css">
   <!-- Load Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuex"></script>
 </head>
 <body>
   <!-- Add Botswanna container -->
-  <div id="botswanna">
-    <Bubble
-      v-for="(bubble, index) in bubbles"
-      :type="bubble.type"
-      :data="bubble.data"
-      :key="index"
-      :index="index"
-      @button-click="_onButtonClick"
-    ></Bubble>
-    <input 
-      v-model="message" 
-      type="text"
-      v-on:keyup.enter="_onInputSubmit"
-    ></input>
+  <div class="chat" id="botswanna">
+    <div class="chat-container">
+      <!-- close button which hides the chat container goes here -->
+      <!-- container which stores the speech bubbles -->
+      <Bubble
+        v-for="(bubble, index) in bubbles"
+        :type="bubble.type"
+        :data="bubble.data"
+        :key="index"
+        :index="index"
+        @button-click="_onButtonClick"
+      ></Bubble>
+      <!-- text input box -->
+      <div>
+        <input
+          v-model="message"
+          type="text"
+          @keyup.enter="_onInputSubmit"
+        ></input>
+      </div>
+    </div>
   </div>
 
   <!-- Load our Botswanna react component -->
