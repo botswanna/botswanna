@@ -30,7 +30,7 @@ Vue.component('BotHeader', {
   `
     <div>
       <p>Botswanna</p>
-      <button name="toggle-display" @click="display ? $emit('hide-bot') : $emit('show-bot')">{{ display ? 'x' : 'o' }}</button>
+      <button name="toggle-display" @click="$emit('toggle-bot')">{{ display ? 'x' : 'o' }}</button>
     </div>
   `
 })
@@ -72,11 +72,8 @@ const Botswanna = Vue.extend({
       // Delete value from input
       this.message = ''
     },
-    _onHideBot() {
-      this.displayBot = false
-    },
-    _onShowBot() {
-      this.displayBot = true
+    _onToggleBot() {
+      this.displayBot = !this.displayBot
     },
     removeMessage(index) {
       // Checking to ensure that remove acts within range of this.bubbles
@@ -95,8 +92,7 @@ const Botswanna = Vue.extend({
   `
     <div>
       <bot-header
-        @hide-bot="_onHideBot"
-        @show-bot="_onShowBot"
+        @toggle-bot="_onToggleBot"
         :display="displayBot"
       ></bot-header>
       <bubble
