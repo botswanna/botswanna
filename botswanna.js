@@ -1,8 +1,8 @@
 Vue.component('Bubble', {
-  props: ['type', 'data', 'index'],
+  props: ['type', 'data', 'index', 'show'],
   template:
   `
-    <div>
+    <div v-if="show">
       <div
         v-if="type === 'text'"
       >
@@ -24,6 +24,17 @@ Vue.component('Bubble', {
   `
 })
 
+Vue.component('BotHeader', {
+  props: ['display'],
+  template:
+  `
+    <div>
+      <p>Botswanna</p>
+      <button name="toggle-display" @click="display ? $emit('hide-bot') : $emit('show-bot')">{{ display ? 'x' : 'o' }}</button>
+    </div>
+  `
+})
+
 const Botswanna = Vue.extend({
   props: {
     initBubbles: Array,
@@ -33,6 +44,7 @@ const Botswanna = Vue.extend({
       message: 'default',
       callback: '',
       bubbles: this.initBubbles,
+      displayBot: true
     };
   },
   methods: {
@@ -60,6 +72,12 @@ const Botswanna = Vue.extend({
       // Delete value from input
       this.message = ''
     },
+    _onHideBot() {
+      this.displayBot = false
+    },
+    _onShowBot() {
+      this.displayBot = true
+    },
     removeMessage(index) {
       // Checking to ensure that remove acts within range of this.bubbles
       // Splice 1 Bubble element out in the array
@@ -72,7 +90,31 @@ const Botswanna = Vue.extend({
     listen(callback) {
       this.callback = callback
     }
-  }
+  },
+  template: 
+  `
+    <div>
+      <bot-header
+        @hide-bot="_onHideBot"
+        @show-bot="_onShowBot"
+        :display="displayBot"
+      ></bot-header>
+      <bubble
+        v-for="(bubble, index) in bubbles"
+        :type="bubble.type"
+        :data="bubble.data"
+        :key="index"
+        :index="index"
+        :show="displayBot"
+        @button-click="_onButtonClick"
+      ></bubble>
+      <input 
+        v-model="message" 
+        type="text"
+        v-on:keyup.enter="_onInputSubmit"
+      ></input>
+    </div>
+  `
 })
 
 module.exports = {

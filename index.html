@@ -5,23 +5,9 @@
 </head>
 <body>
   <!-- Add Botswanna container -->
-  <div id="botswanna">
-    <Bubble
-      v-for="(bubble, index) in bubbles"
-      :type="bubble.type"
-      :data="bubble.data"
-      :key="index"
-      :index="index"
-      @button-click="_onButtonClick"
-    ></Bubble>
-    <input 
-      v-model="message" 
-      type="text"
-      v-on:keyup.enter="_onInputSubmit"
-    ></input>
-  </div>
+  <div id="botswanna"></div>
 
-  <!-- Load our Botswanna react component -->
+  <!-- Load our Botswanna component -->
   <script src="botswanna.js"></script>
   <script>
     const botswanna = new Botswanna({
