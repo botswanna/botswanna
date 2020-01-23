@@ -4,9 +4,13 @@ Vue.component('Bubble', {
   `
     <div>
       <div
+        class="p-2 m-0 position-relative"
+        :class="[ data.bot ? 'leftTextBubble' : 'rightTextBubble' ]"
         v-if="type === 'text'"
       >
-        <p>{{ data.bot ? "Bot" : "Human" }} : {{ data.content }}</p>
+        <p>
+          {{ data.content }}
+        </p>
       </div>
 
       <div

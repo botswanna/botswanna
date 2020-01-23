@@ -1,5 +1,6 @@
 <head>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   <!-- Load Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuex"></script>
@@ -7,9 +8,12 @@
 <body>
   <!-- Add Botswanna container -->
   <div class="chat" id="botswanna">
-    <div class="chat-container">
+    <div class="chat-header">
+      Ha
+    </div>
       <!-- close button which hides the chat container goes here -->
       <!-- container which stores the speech bubbles -->
+    <div class="bubbles-container">
       <Bubble
         v-for="(bubble, index) in bubbles"
         :type="bubble.type"
@@ -18,14 +22,16 @@
         :index="index"
         @button-click="_onButtonClick"
       ></Bubble>
+    </div>
       <!-- text input box -->
-      <div>
-        <input
-          v-model="message"
-          type="text"
-          @keyup.enter="_onInputSubmit"
-        ></input>
-      </div>
+    <div class="input-box">
+      <input
+        class="chat-input"
+        v-model="message"
+        type="text"
+        @keyup.enter="_onInputSubmit"
+        placeholder="Type something"
+      ></input>
     </div>
   </div>
 
@@ -54,7 +60,7 @@
             type: 'text',
             data: {
               content: 'Build something awesome',
-              bot: false 
+              bot: true, 
             }
           }
         ]

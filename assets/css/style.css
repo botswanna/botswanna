@@ -1,8 +1,65 @@
 .chat {
   position: fixed;
-  bottom: 0px;
+  bottom: 20px;
+  top: 20px;
+  width: 400px;
   z-index: 99;
   right: 2em;
   left: auto;
   margin: 15px;
+  display: flex;
+}
+
+.chat-header {
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  background: grey;
+}
+
+.input-box {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.chat-input {
+  width: 100%;
+}
+
+.bubbles-container {
+  flex-grow: 1;
+  margin-top: 30px;
+  display: inline-block;
+  overflow-y: scroll;
+  max-height: 95%;
+  width: 100%;
+}
+
+.leftTextBubble, .rightTextBubble {
+	margin-top: 3px !important;
+  margin-bottom: 3px !important;
+}
+
+
+.rightTextBubble p {
+	background: #42a5f5;
+	color: #fff !important;
+	border-radius: 20px 20px 3px 20px;
+	display: block;
+  max-width: 50%;
+  float: right;
+  clear: both;
+  padding: 7px 13px 7px 13px;
+}
+
+.leftTextBubble p {
+	background: #f1f1f1;
+	color: #000 !important;
+	border-radius: 20px 20px 20px 3px;
+	display: block;
+  max-width: 50%;
+  float: left;
+  clear: both;
+	padding: 7px 13px 7px 13px;
 }
