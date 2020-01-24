@@ -24,18 +24,33 @@
   justify-content: flex-end;
 }
 
-.chat-close {
-  display: flex;
-  justify-content: flex-end;
-}
 
+.chat-header {
+  position: absolute;
+  height: 35px;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  background: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.chat-expand {
+  margin-right: auto;
+}
+.chat-header-title {
+  color: #ffffff;
+  margin: 8px;
+}
+.chat-close {
+  margin-left: auto;
+}
 .chat-open-icon {
   height: 75px;
   width: 75px;
   right: 0px;
   cursor: pointer;
 }
-
 .chat-close-icon {
   height: 18px;
   width: 18px;
@@ -43,29 +58,24 @@
   margin: 8px;
 }
 
-.chat-header {
-  position: absolute;
-  height: 30px;
-  width: 100%;
-  border-radius: 10px 10px 0px 0px;
-  background: grey;
-}
 
 .input-box {
   position: absolute;
   bottom: 0px;
   width: 100%;
 }
-
 .chat-input {
   width: 100%;
+  line-height: 30px;
+  padding: 5px 10px 5px 10px;
 }
+
 
 .bubbles-container {
   flex-grow: 1;
   margin-top: 40px;
-  margin-bottom: 40px;
-  display: inline-block;
+  margin-bottom: 50px;
+  display: block;
   overflow-y: scroll;
   max-height: 95%;
   width: 100%;
@@ -85,7 +95,6 @@
 	margin-top: 5px !important;
   margin-bottom: 5px !important;
 }
-
 
 .right-text-bubble {
 	background: #42a5f5;
