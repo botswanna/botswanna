@@ -36,13 +36,13 @@
   width: 100%;
 }
 
-.leftTextBubble, .rightTextBubble {
-	margin-top: 3px !important;
-  margin-bottom: 3px !important;
+.textbubble {
+	margin-top: 5px !important;
+  margin-bottom: 5px !important;
 }
 
 
-.rightTextBubble p {
+.rightTextBubble {
 	background: #42a5f5;
 	color: #fff !important;
 	border-radius: 20px 20px 3px 20px;
@@ -53,7 +53,7 @@
   padding: 7px 13px 7px 13px;
 }
 
-.leftTextBubble p {
+.leftTextBubble {
 	background: #f1f1f1;
 	color: #000 !important;
 	border-radius: 20px 20px 20px 3px;
@@ -62,4 +62,17 @@
   float: left;
   clear: both;
 	padding: 7px 13px 7px 13px;
+}
+
+.suggestion-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.suggestion-btn {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
 }

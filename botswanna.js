@@ -4,20 +4,20 @@ Vue.component('Bubble', {
   `
     <div>
       <div
-        class="p-2 m-0 position-relative"
-        :class="[ data.bot ? 'leftTextBubble' : 'rightTextBubble' ]"
+        :class="[ 'textBubble', data.bot ? 'leftTextBubble' : 'rightTextBubble' ]"
         v-if="type === 'text'"
       >
-        <p>
-          {{ data.content }}
-        </p>
+        {{ data.content }}
       </div>
 
       <div
         v-else-if="type === 'buttons'"
-        v-for="button in data.buttons"
+        class="suggestion-btn-container"
       >
-        <button 
+        <button
+          v-for="(button, index) in data.buttons"
+          class="suggestion-btn"
+          :key="index"
           :name="button.value"
           @click="$emit('button-click', { value: button.value, index: index })"
         >
@@ -80,7 +80,3 @@ const Botswanna = Vue.extend({
     }
   },
 })
-
-module.exports = {
-  Botswanna,
-}
