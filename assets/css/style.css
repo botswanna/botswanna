@@ -22,6 +22,10 @@
   margin: 15px;
   display: flex;
   justify-content: flex-end;
+  transition: transform 0.5s;
+}
+.chat-minimized:hover{
+  transform: translateY(-5px);
 }
 
 
@@ -133,3 +137,16 @@
   margin-right: 3px;
 }
 
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .25s, transform 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.fade-enter {
+  transform: translateX(-10px);
+}
+.fade-leave-to {
+  transform: translateX(10px);
+}

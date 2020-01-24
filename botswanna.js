@@ -19,7 +19,7 @@ Vue.component('Bubble', {
           src="assets/img/botswanna-icon.svg"
         >
         <div
-          :class="[ 'text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble' ]"
+          :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
           {{ data.content }}
         </div>
