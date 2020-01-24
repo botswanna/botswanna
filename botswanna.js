@@ -8,16 +8,21 @@ Vue.component('Bubble', {
   template:
   `
     <div class="bubble">
-      <img
-        class="bot-prof-icon"
-        v-if="isBotText === true"
-        src="assets/img/botswanna-icon.svg"
-      >
       <div
-        :class="[ 'textBubble', data.bot ? 'leftTextBubble' : 'rightTextBubble' ]"
+        class="text-bubble-container"
         v-if="type === 'text'"
+        :style="isBotText ? '' : 'justify-content: flex-end'"
       >
-        {{ data.content }}
+        <img
+          class="bot-prof-icon"
+          v-if="isBotText === true"
+          src="assets/img/botswanna-icon.svg"
+        >
+        <div
+          :class="[ 'text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble' ]"
+        >
+          {{ data.content }}
+        </div>
       </div>
 
       <div

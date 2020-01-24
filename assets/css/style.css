@@ -69,7 +69,7 @@
   width: 100%;
 }
 
-.bubble {
+.bubble .text-bubble-container {
   display: flex;
 }
 
@@ -79,13 +79,13 @@
   margin: 5px;
 }
 
-.textbubble {
+.text-bubble {
 	margin-top: 5px !important;
   margin-bottom: 5px !important;
 }
 
 
-.rightTextBubble {
+.right-text-bubble {
 	background: #42a5f5;
 	color: #fff !important;
 	border-radius: 20px 20px 3px 20px;
@@ -94,9 +94,11 @@
   float: right;
   clear: both;
   padding: 7px 13px 7px 13px;
+  margin-right: 10px;
+  justify-content: flex-end;
 }
 
-.leftTextBubble {
+.left-text-bubble {
 	background: #f1f1f1;
 	color: #000 !important;
 	border-radius: 20px 20px 20px 3px;
