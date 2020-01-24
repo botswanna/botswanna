@@ -9,7 +9,7 @@
       <!-- Add Botswanna container -->
       <div 
         class="chat"
-        :style="displayChat ? '' : 'display: none'"
+        v-show="displayChat"
       >
         <div class="chat-header">
           <div class="chat-expand"></div>
@@ -49,7 +49,7 @@
       </div>
       <div
         class="chat-minimized"
-        :style="displayChat ? 'display: none' : ''"
+        v-show="!displayChat"
       >
           <img
             class="chat-open-icon"
