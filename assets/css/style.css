@@ -10,10 +10,43 @@
   display: flex;
 }
 
+.chat-minimized {
+  position: fixed;
+  bottom: 20px;
+  height: 100px;
+  width: 400px;
+  z-index: 99;
+  right: 2em;
+  left: auto;
+  margin: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-open-icon {
+  height: 75px;
+  width: 75px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.chat-close-icon {
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+  margin: 8px;
+}
+
 .chat-header {
   position: absolute;
-  height: 20px;
+  height: 30px;
   width: 100%;
+  border-radius: 10px 10px 0px 0px;
   background: grey;
 }
 
@@ -29,11 +62,21 @@
 
 .bubbles-container {
   flex-grow: 1;
-  margin-top: 30px;
+  margin-top: 40px;
   display: inline-block;
   overflow-y: scroll;
   max-height: 95%;
   width: 100%;
+}
+
+.bubble {
+  display: flex;
+}
+
+.bot-prof-icon {
+  height: 35px;
+  width: 35px;
+  margin: 5px;
 }
 
 .textbubble {
@@ -71,8 +114,9 @@
 }
 
 .suggestion-btn {
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   margin-left: 3px;
   margin-right: 3px;
 }
+

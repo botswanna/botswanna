@@ -1,8 +1,18 @@
 Vue.component('Bubble', {
   props: ['type', 'data', 'index'],
+  computed: {
+    isBotText: function() {
+      return this.type === 'text' && this.data.bot === true
+    },
+  },
   template:
   `
-    <div>
+    <div class="bubble">
+      <img
+        class="bot-prof-icon"
+        v-if="isBotText === true"
+        src="assets/img/botswanna-icon.svg"
+      >
       <div
         :class="[ 'textBubble', data.bot ? 'leftTextBubble' : 'rightTextBubble' ]"
         v-if="type === 'text'"
@@ -37,6 +47,7 @@ const Botswanna = Vue.extend({
       message: '',
       callback: '',
       bubbles: this.initBubbles,
+      displayChat: false,
     };
   },
   methods: {
@@ -65,6 +76,9 @@ const Botswanna = Vue.extend({
         // Delete value from input
         this.message = ''
       }
+    },
+    async _toggleDisplay() {
+      this.displayChat = !this.displayChat;
     },
     removeMessage(index) {
       // Checking to ensure that remove acts within range of this.bubbles
