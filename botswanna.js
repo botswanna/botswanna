@@ -34,7 +34,7 @@ const Botswanna = Vue.extend({
   },
   data: function() {
     return { 
-      message: 'default',
+      message: '',
       callback: '',
       bubbles: this.initBubbles,
     };
@@ -52,17 +52,19 @@ const Botswanna = Vue.extend({
       this.callback({ value, trigger: 'button' })
     },
     async _onInputSubmit() {
-      const value = this.message
-      const data = {
-        content: value,
-        bot: false
+      if (this.message !== '') {
+        const value = this.message
+        const data = {
+          content: value,
+          bot: false
+        }
+        const type = 'text'
+        this.sendMessage(type, data)
+        this.callback({ value, trigger: 'text' })
+  
+        // Delete value from input
+        this.message = ''
       }
-      const type = 'text'
-      this.sendMessage(type, data)
-      this.callback({ value, trigger: 'text' })
-
-      // Delete value from input
-      this.message = ''
     },
     removeMessage(index) {
       // Checking to ensure that remove acts within range of this.bubbles
