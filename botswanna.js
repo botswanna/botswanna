@@ -55,6 +55,9 @@ const Botswanna = Vue.extend({
       displayChat: false,
     };
   },
+  updated() {
+    this.scroll();
+  },
   methods: {
     async _onButtonClick(eventObject) {
       const { value, index } = eventObject
@@ -96,6 +99,9 @@ const Botswanna = Vue.extend({
     },
     listen(callback) {
       this.callback = callback
-    }
+    },
+    scroll() {
+      document.getElementById('bubbles-container').scrollTop = document.getElementById('bubbles-container').scrollHeight;
+    },
   },
 })

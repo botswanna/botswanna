@@ -22,7 +22,7 @@
         </div>
           <!-- close button which hides the chat container goes here -->
           <!-- container which stores the speech bubbles -->
-        <div class="bubbles-container">
+        <div class="bubbles-container" id="bubbles-container">
           <Bubble
             v-for="(bubble, index) in bubbles"
             :type="bubble.type"
