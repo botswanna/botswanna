@@ -1,19 +1,38 @@
 Vue.component('Bubble', {
-  props: ['type', 'data', 'index', 'show'],
+  props: ['type', 'data', 'index'],
+  computed: {
+    isBotText: function() {
+      return this.type === 'text' && this.data.bot === true
+    },
+  },
   template:
   `
-    <div v-if="show">
+    <div class="bubble">
       <div
+        class="text-bubble-container"
         v-if="type === 'text'"
+        :style="isBotText ? '' : 'justify-content: flex-end'"
       >
-        <p>{{ data.bot ? "Bot" : "Human" }} : {{ data.content }}</p>
+        <img
+          class="bot-prof-icon"
+          v-if="isBotText === true"
+          src="assets/img/botswanna-icon.svg"
+        >
+        <div
+          :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
+        >
+          {{ data.content }}
+        </div>
       </div>
 
       <div
         v-else-if="type === 'buttons'"
-        v-for="button in data.buttons"
+        class="suggestion-btn-container"
       >
-        <button 
+        <button
+          v-for="(button, index) in data.buttons"
+          class="suggestion-btn"
+          :key="index"
           :name="button.value"
           @click="$emit('button-click', { value: button.value, index: index })"
         >
@@ -41,13 +60,28 @@ const Botswanna = Vue.extend({
   },
   data: function() {
     return { 
-      message: 'default',
+      message: '',
       callback: '',
       bubbles: this.initBubbles,
-      displayBot: true
+      displayChat: false,
     };
   },
+  updated() {
+    this.scroll();
+  },
   methods: {
+    sendMessage(type, data) {
+      // Validate type and data
+      this.bubbles.push({ type, data })
+    },
+    removeMessage(index) {
+      // Checking to ensure that remove acts within range of this.bubbles
+      // Splice 1 Bubble element out in the array
+      this.bubbles.splice(index, 1)
+    },
+    listen(callback) {
+      this.callback = callback
+    },
     async _onButtonClick(eventObject) {
       const { value, index } = eventObject
       const data = {
@@ -60,59 +94,33 @@ const Botswanna = Vue.extend({
       this.callback({ value, trigger: 'button' })
     },
     async _onInputSubmit() {
-      const value = this.message
-      const data = {
-        content: value,
-        bot: false
+      // prevent submission of empty messages
+      if (this.message !== '') {
+        const value = this.message
+        const data = {
+          content: value,
+          bot: false
+        }
+        const type = 'text'
+        this.sendMessage(type, data)
+        this.callback({ value, trigger: 'text' })
+  
+        // Delete value from input
+        this.message = ''
       }
-      const type = 'text'
-      this.sendMessage(type, data)
-      this.callback({ value, trigger: 'text' })
-
-      // Delete value from input
-      this.message = ''
     },
-    _onToggleBot() {
-      this.displayBot = !this.displayBot
+    async _toggleDisplay() {
+      this.displayChat = !this.displayChat;
     },
-    removeMessage(index) {
-      // Checking to ensure that remove acts within range of this.bubbles
-      // Splice 1 Bubble element out in the array
-      this.bubbles.splice(index, 1)
+    scroll() {
+      document.getElementById('bubbles-container').scrollTop = document.getElementById('bubbles-container').scrollHeight;
     },
-    sendMessage(type, data) {
-      // Validate type and data
-      this.bubbles.push({ type, data })
-    },
-    listen(callback) {
-      this.callback = callback
-    }
   },
-  template: 
-  `
-    <div>
-      <bot-header
-        @toggle-bot="_onToggleBot"
-        :display="displayBot"
-      ></bot-header>
-      <bubble
-        v-for="(bubble, index) in bubbles"
-        :type="bubble.type"
-        :data="bubble.data"
-        :key="index"
-        :index="index"
-        :show="displayBot"
-        @button-click="_onButtonClick"
-      ></bubble>
-      <input 
-        v-model="message" 
-        type="text"
-        v-on:keyup.enter="_onInputSubmit"
-      ></input>
-    </div>
-  `
+  mounted() {
+    // automatically scroll to the bottom of bubbles-container when window is resized
+    window.addEventListener('resize', this.scroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.scroll);
+  }
 })
-
-module.exports = {
-  Botswanna,
-}
