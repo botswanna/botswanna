@@ -1,4 +1,23 @@
-Vue.component('Bubble', {
+const BotHeader = {
+  template:
+  ` 
+    <div class="chat-header">
+      <div class="chat-expand"></div>
+      <div class="chat-header-title">
+        botswanna
+      </div>
+      <div class="chat-close">
+        <img
+          class="chat-close-icon"
+          src="assets/img/chat-close-icon.svg"
+          @click="$emit('toggle-display')"
+        >
+      </div>
+    </div>
+  `,
+};
+
+const Bubble = {
   props: ['type', 'data', 'index'],
   computed: {
     isBotText: function() {
@@ -6,7 +25,7 @@ Vue.component('Bubble', {
     },
   },
   template:
-  `
+`
     <div class="bubble">
       <div
         class="text-bubble-container"
@@ -40,23 +59,59 @@ Vue.component('Bubble', {
         </button>
       </div>
     </div>
-  `
-})
+  `,
+};
 
-Vue.component('BotHeader', {
-  props: ['display'],
+const BotTextInput = {
+  props: {
+    value: {
+      type: String
+    }
+  },
+  methods: {
+    updateValue: function (value) {
+      this.$emit('input', value)
+    }
+  },
   template:
   `
-    <div>
-      <p>Botswanna</p>
-      <button name="toggle-display" @click="$emit('toggle-bot')">{{ display ? 'x' : 'o' }}</button>
+    <div class="input-box">
+      <input
+        class="chat-input"
+        type="text"
+        @input="updateValue($event.target.value)"
+        @keyup.enter="$emit('input-submit')"
+        placeholder="Type something"
+        :value="value"
+      ></input>
     </div>
+  `,
+};
+
+const BotMinimized = {
+  template:
   `
-})
+    <div
+      class="chat-minimized"
+    >
+        <img
+          class="chat-open-icon"
+          src="assets/img/botswanna-icon.svg"
+          @click="$emit('toggle-display')"
+        >
+    </div>
+  `,
+};
 
 const Botswanna = Vue.extend({
   props: {
     initBubbles: Array,
+  },
+  components: {
+    'bot-header': BotHeader,
+    'bubble': Bubble,
+    'bot-text-input': BotTextInput,
+    'bot-minimized': BotMinimized,
   },
   data: function() {
     return { 
@@ -122,5 +177,48 @@ const Botswanna = Vue.extend({
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.scroll);
-  }
+  },
+  template:
+  `
+    <div class="container">
+      <!-- Add Botswanna container -->
+      <transition name="fade">
+        <div 
+          class="chat"
+          v-show="displayChat"
+        >
+          <!-- chatbot header -->
+          <bot-header
+            @toggle-display="_toggleDisplay"
+          >
+          </bot-header>
+          <!-- container which stores the speech bubbles -->
+          <div class="bubbles-container" id="bubbles-container">
+            <bubble
+              v-for="(bubble, index) in bubbles"
+              :type="bubble.type"
+              :data="bubble.data"
+              :key="index"
+              :index="index"
+              @button-click="_onButtonClick"
+            ></bubble>
+          </div>
+          <!-- text input box -->
+          <bot-text-input
+            v-model="message"
+            @input-submit="_onInputSubmit"
+          >
+          </bot-text-input
+          >
+        </div>
+      </transition>
+      <transition name="fade">
+        <bot-minimized
+          v-show="!displayChat"
+          @toggle-display="_toggleDisplay"
+        >
+        </bot-minimized>
+      </transition>
+    </div>
+  `
 })
