@@ -43,6 +43,17 @@ Vue.component('Bubble', {
   `
 })
 
+Vue.component('BotHeader', {
+  props: ['display'],
+  template:
+  `
+    <div>
+      <p>Botswanna</p>
+      <button name="toggle-display" @click="$emit('toggle-bot')">{{ display ? 'x' : 'o' }}</button>
+    </div>
+  `
+})
+
 const Botswanna = Vue.extend({
   props: {
     initBubbles: Array,
