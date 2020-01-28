@@ -2,9 +2,15 @@ const BotHeader = {
   template:
   ` 
     <div class="chat-header">
-      <div class="chat-expand"></div>
+      <div class="chat-expand">
+        <img
+          class="chat-close-icon"
+          src="assets/img/chat-close-icon.svg"
+          @click="$emit('toggle-display')"
+        >
+      </div>
       <div class="chat-header-title">
-        botswanna
+        Botswanna
       </div>
       <div class="chat-close">
         <img
@@ -76,14 +82,21 @@ const BotTextInput = {
   template:
   `
     <div class="input-box">
-      <input
-        class="chat-input"
-        type="text"
-        @input="updateValue($event.target.value)"
-        @keyup.enter="$emit('input-submit')"
-        placeholder="Type something"
-        :value="value"
-      ></input>
+        <input
+          class="chat-input"
+          type="text"
+          @input="updateValue($event.target.value)"
+          @keyup.enter="$emit('input-submit')"
+          placeholder="Type something"
+          :value="value"
+        ></input>
+      <div class="input-submit">
+        <img
+          class="input-submit-icon"
+          src="assets/img/input-submit-icon.svg"
+          @click="$emit('input-submit')"
+        >
+      </div>
     </div>
   `,
 };
