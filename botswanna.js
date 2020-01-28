@@ -18,7 +18,7 @@ const BotHeader = {
 };
 
 const Bubble = {
-  props: ['type', 'data', 'index'],
+  props: ['type', 'data', 'bubble-index'],
   computed: {
     isBotText: function() {
       return this.type === 'text' && this.data.bot === true
@@ -53,7 +53,7 @@ const Bubble = {
           class="suggestion-btn"
           :key="index"
           :name="button.value"
-          @click="$emit('button-click', { value: button.value, index: index })"
+          @click="$emit('button-click', { value: button.value, index: bubble-index })"
         >
           {{ button.title }}
         </button>
@@ -199,7 +199,7 @@ const Botswanna = Vue.extend({
               :type="bubble.type"
               :data="bubble.data"
               :key="index"
-              :index="index"
+              :bubble-index="index"
               @button-click="_onButtonClick"
             ></bubble>
           </div>
