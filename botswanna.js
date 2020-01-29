@@ -1,12 +1,5 @@
-// test integration with API gateway
-(async () => {
-  const LAMBDA_API_URL = 'https://fzj9h0fbf7.execute-api.ap-southeast-1.amazonaws.com/default/chatbot-test'
-  const resp = await axios.get(LAMBDA_API_URL)
-  const testdiv = document.createElement('div')
-  testdiv.innerText = resp.data
-  document.body.appendChild(testdiv)
-})()
-
+// API gateway
+const LAMBDA_API_URL = 'https://fzj9h0fbf7.execute-api.ap-southeast-1.amazonaws.com/test/chatbot-test'
 
 // create div to attach botswanna to
 const botdiv = document.createElement('div')
@@ -279,7 +272,7 @@ const botswanna = new Botswanna({
     ]
   }
 }).$mount('#botswanna')
-botswanna.listen(({value, trigger}) => console.log(value, trigger, 'callback'))
+
 botswanna.sendMessage(
   'text', 
   {
@@ -287,3 +280,53 @@ botswanna.sendMessage(
     bot: true,
   },
 )
+
+botswanna.listen(async ({value, trigger}) => {
+  console.log(value, trigger, 'callback')
+
+  let context
+
+  // POST request to API gateway
+  const resp = await axios.post(LAMBDA_API_URL, { value, context })
+  console.log(resp)
+  const { value: respValue } = resp.data
+  botswanna.sendMessage(
+    'text',
+    {
+      content: respValue,
+      bot: true,
+    }
+  )
+
+  // Display response
+  // answer = resp.data.answer
+  // context = resp.data.context
+  // suggestions = resp.data.suggestions 
+
+  // // render text responses
+  // if (answer) {
+  //   botswanna.sendMessage(
+  //     'text',
+  //     {
+  //       content: answer,
+  //       bot: true,
+  //     }
+  //   )
+  // }
+
+  // // render suggestion responses
+  // if (suggestions) {
+  //   botswanna.sendMessage(
+  //     'buttons',
+  //     {
+  //       buttons: suggestions.suggestions.suggestions.map(suggestion => {
+  //         return {
+  //           title: suggestion.title,
+  //           value: suggestion.title,
+  //         }
+  //       })
+  //     }
+  //   )
+  // }
+})
+
