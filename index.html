@@ -1,49 +1,11 @@
 <head>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/style.css">
   <!-- Load Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuex"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <div id="botswanna"></div>
   <!-- Load our Botswanna component -->
-  <script src="botswanna.js"></script>
-  <script>
-    const botswanna = new Botswanna({
-      propsData: {
-        initBubbles: [
-          { 
-            type: 'buttons', 
-            data: {
-              buttons: [
-                { 
-                  title: 'Learn Vue', 
-                  value: 'Vue' 
-                },
-                { 
-                  title: 'Learn React', 
-                  value: 'React' 
-                }
-              ]
-            }
-          },
-          { 
-            type: 'text',
-            data: {
-              content: 'Build something awesome',
-              bot: true, 
-            }
-          }
-        ]
-      }
-    }).$mount('#botswanna')
-    botswanna.listen(({value, trigger}) => console.log(value, trigger, 'callback'))
-    botswanna.sendMessage(
-      'text', 
-      {
-        content: 'Learn JavaScript',
-        bot: true,
-      },
-    )
-  </script>
+  <script src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna.js"></script>
 </body>

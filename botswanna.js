@@ -1,3 +1,18 @@
+// test integration with API gateway
+(async () => {
+  const LAMBDA_API_URL = 'https://fzj9h0fbf7.execute-api.ap-southeast-1.amazonaws.com/default/chatbot-test'
+  const resp = await axios.get(LAMBDA_API_URL)
+  const testdiv = document.createElement('div')
+  testdiv.innerText = resp.data
+  document.body.appendChild(testdiv)
+})()
+
+
+// create div to attach botswanna to
+const botdiv = document.createElement('div')
+botdiv.id = "botswanna"
+document.body.appendChild(botdiv)
+
 const BotHeader = {
   template:
   ` 
@@ -5,7 +20,7 @@ const BotHeader = {
       <div class="chat-expand">
         <img
           class="chat-close-icon"
-          src="assets/img/chat-close-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/chat-close-icon.svg"
           @click="$emit('toggle-display')"
         >
       </div>
@@ -15,7 +30,7 @@ const BotHeader = {
       <div class="chat-close">
         <img
           class="chat-close-icon"
-          src="assets/img/chat-close-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/chat-close-icon.svg"
           @click="$emit('toggle-display')"
         >
       </div>
@@ -41,7 +56,7 @@ const Bubble = {
         <img
           class="bot-prof-icon"
           v-if="isBotText === true"
-          src="assets/img/botswanna-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg"
         >
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
@@ -93,7 +108,7 @@ const BotTextInput = {
       <div class="input-submit">
         <img
           class="input-submit-icon"
-          src="assets/img/input-submit-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/input-submit-icon.svg"
           @click="$emit('input-submit')"
         >
       </div>
@@ -109,7 +124,7 @@ const BotMinimized = {
     >
         <img
           class="chat-open-icon"
-          src="assets/img/botswanna-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg"
           @click="$emit('toggle-display')"
         >
     </div>
@@ -235,3 +250,40 @@ const Botswanna = Vue.extend({
     </div>
   `
 })
+
+const botswanna = new Botswanna({
+  propsData: {
+    initBubbles: [
+      { 
+        type: 'buttons', 
+        data: {
+          buttons: [
+            { 
+              title: 'Learn Vue', 
+              value: 'Vue' 
+            },
+            { 
+              title: 'Learn React', 
+              value: 'React' 
+            }
+          ]
+        }
+      },
+      { 
+        type: 'text',
+        data: {
+          content: 'Build something awesome',
+          bot: true, 
+        }
+      }
+    ]
+  }
+}).$mount('#botswanna')
+botswanna.listen(({value, trigger}) => console.log(value, trigger, 'callback'))
+botswanna.sendMessage(
+  'text', 
+  {
+    content: 'Learn JavaScript',
+    bot: true,
+  },
+)
