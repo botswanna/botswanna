@@ -203,9 +203,9 @@ const Botswanna = Vue.extend({
           <!-- container which stores the speech bubbles -->
           <div class="bubbles-container" id="bubbles-container">
             <bubble
-              v-for="(bubble, index) in bubbles"
-              :type="bubble.type"
-              :data="bubble.data"
+              v-for="(eachBubble, index) in bubbles"
+              :type="eachBubble.type"
+              :data="eachBubble.data"
               :key="index"
               :bubble-index="index"
               @button-click="_onButtonClick"
