@@ -10,7 +10,7 @@ const BotHeader = {
       <div class="chat-close">
         <img
           class="chat-close-icon"
-          src="assets/img/chat-close-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/chat-close-icon.svg"
           @click="$emit('toggle-display')"
         >
       </div>
@@ -36,7 +36,7 @@ const Bubble = {
         <img
           class="bot-prof-icon"
           v-if="isBotText === true"
-          src="assets/img/botswanna-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg"
         >
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
@@ -88,7 +88,7 @@ const BotTextInput = {
       <div class="input-submit">
         <img
           class="input-submit-icon"
-          src="assets/img/input-submit-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/input-submit-icon.svg"
           @click="$emit('input-submit')"
         >
       </div>
@@ -104,7 +104,7 @@ const BotMinimized = {
     >
         <img
           class="chat-open-icon"
-          src="assets/img/botswanna-icon.svg"
+          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg"
           @click="$emit('toggle-display')"
         >
     </div>
