@@ -10,6 +10,7 @@
 }
 
 .chat {
+  background: white;
   position: fixed;
   bottom: 5px;
   width: 500px;
@@ -18,7 +19,7 @@
   max-height: calc(100vh - 10px - 30px); 
   /* Max width = 100vw - 2*right_distance - 2*margin */
   max-width: calc(100vw - 10px - 30px); 
-  z-index: 99;
+  z-index: 1000;
   right: 5px;
   left: auto;
   margin: 15px;
@@ -33,7 +34,7 @@
   bottom: 0px;
   height: 75px;
   width: 75px;
-  z-index: 99;
+  z-index: 1000;
   right: 5px;
   left: auto;
   margin: 15px;
