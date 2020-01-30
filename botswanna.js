@@ -1,11 +1,15 @@
 const BotHeader = {
+  props: ['name'],
   template:
   ` 
     <div class="chat-header">
       <div class="chat-expand">
       </div>
-      <div class="chat-header-title">
-        Botswanna
+      <div
+        class="chat-header-title"
+        :name="name"
+      >
+        {{ name }}
       </div>
       <div class="chat-close">
         <img
@@ -19,7 +23,20 @@ const BotHeader = {
 };
 
 const Bubble = {
-  props: ['type', 'data', 'bubble-index'],
+  props: {
+    type: {
+      type: String,
+    },
+    data: {
+      type: Object,
+    },
+    "bubble-index": {
+      type: Number,
+    },
+    iconURL: {
+      type: String,
+    }
+  },
   computed: {
     isBotText: function() {
       return this.type === 'text' && this.data.bot === true
@@ -36,7 +53,7 @@ const Bubble = {
         <img
           class="bot-prof-icon"
           v-if="isBotText === true"
-          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg"
+          :src="iconURL"
         >
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
@@ -97,6 +114,11 @@ const BotTextInput = {
 };
 
 const BotMinimized = {
+  props: {
+    iconURL: {
+      type: String
+    }
+  },
   template:
   `
     <div
@@ -104,7 +126,7 @@ const BotMinimized = {
     >
         <img
           class="chat-open-icon"
-          src="https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg"
+          :src="iconURL"
           @click="$emit('toggle-display')"
         >
     </div>
@@ -114,6 +136,14 @@ const BotMinimized = {
 const Botswanna = Vue.extend({
   props: {
     initBubbles: Array,
+    initName: {
+      type: String,
+      default: 'Botswanna',
+    },
+    iconURL: {
+      type: String,
+      default: 'https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg',
+    }
   },
   components: {
     'bot-header': BotHeader,
@@ -125,6 +155,7 @@ const Botswanna = Vue.extend({
     return { 
       message: '',
       callback: '',
+      name: this.initName,
       bubbles: this.initBubbles,
       displayChat: false,
     };
@@ -198,6 +229,7 @@ const Botswanna = Vue.extend({
           <!-- chatbot header -->
           <bot-header
             @toggle-display="_toggleDisplay"
+            :name="name"
           >
           </bot-header>
           <!-- container which stores the speech bubbles -->
@@ -208,6 +240,7 @@ const Botswanna = Vue.extend({
               :data="eachBubble.data"
               :key="index"
               :bubble-index="index"
+              :iconURL="iconURL"
               @button-click="_onButtonClick"
             ></bubble>
           </div>
@@ -222,6 +255,7 @@ const Botswanna = Vue.extend({
       </transition>
       <transition name="fade">
         <bot-minimized
+          :iconURL="iconURL"
           v-show="!displayChat"
           @toggle-display="_toggleDisplay"
         >
