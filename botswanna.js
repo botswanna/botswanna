@@ -1,11 +1,15 @@
 const BotHeader = {
+  props: ['name'],
   template:
   ` 
     <div class="chat-header">
       <div class="chat-expand">
       </div>
-      <div class="chat-header-title">
-        Botswanna
+      <div
+        class="chat-header-title"
+        :name="name"
+      >
+        {{ name }}
       </div>
       <div class="chat-close">
         <img
@@ -114,6 +118,10 @@ const BotMinimized = {
 const Botswanna = Vue.extend({
   props: {
     initBubbles: Array,
+    initName: {
+      type: String,
+      default: 'Botswanna',
+    },
   },
   components: {
     'bot-header': BotHeader,
@@ -125,6 +133,7 @@ const Botswanna = Vue.extend({
     return { 
       message: '',
       callback: '',
+      name: this.initName,
       bubbles: this.initBubbles,
       displayChat: false,
     };
@@ -198,6 +207,7 @@ const Botswanna = Vue.extend({
           <!-- chatbot header -->
           <bot-header
             @toggle-display="_toggleDisplay"
+            :name="name"
           >
           </bot-header>
           <!-- container which stores the speech bubbles -->
