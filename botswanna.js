@@ -3,11 +3,6 @@ const BotHeader = {
   ` 
     <div class="chat-header">
       <div class="chat-expand">
-        <img
-          class="chat-close-icon"
-          src="assets/img/chat-close-icon.svg"
-          @click="$emit('toggle-display')"
-        >
       </div>
       <div class="chat-header-title">
         Botswanna

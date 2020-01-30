@@ -61,6 +61,8 @@
 }
 .chat-expand {
   padding: 10px;
+  height: 30px;
+  width: 30px;
 }
 .chat-header-title {
   color: #ffffff;
@@ -156,11 +158,12 @@
 	color: white;
 	border-radius: 20px 20px 3px 20px;
 	display: block;
-  max-width: 50%;
+  max-width: 70%;
   float: right;
   clear: both;
   padding: 13px;
   justify-content: flex-end;
+  word-wrap: break-word;
 }
 
 .left-text-bubble {
@@ -168,10 +171,11 @@
 	color: var(--dark-blue);
 	border-radius: 20px 20px 20px 3px;
 	display: block;
-  max-width: 50%;
+  max-width: 70%;
   float: left;
   clear: both;
-	padding: 13px;
+  padding: 13px;
+  word-wrap: break-word;
 }
 
 .suggestion-btn-container {
