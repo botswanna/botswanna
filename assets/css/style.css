@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
 
 :root {
-  --primary-blue: #1F76C7;
-  --secondary-blue: #D6E5F2;
-  --dark-blue: #31475C;
-  --light-grey: #DFDFDF;
+  --bot-header-color: #1F76C7;
+  --chat-bubble-color: #D6E5F2;
+  --font-color: #31475C;
+  --highlight-color: #DFDFDF;
   font-family: 'Lato', sans-serif;
   font-size: 15px;
 }
@@ -53,7 +53,7 @@
   height: 50px;
   width: 100%;
   border-radius: 10px 10px 0px 0px;
-  background: var(--primary-blue);
+  background: var(--bot-header-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -96,7 +96,7 @@
 }
 
 .input-box {
-  border-top: 1px solid var(--light-grey);
+  border-top: 1px solid var(--highlight-color);
   bottom: 0px;
   height: 50px;
   display: flex;
@@ -125,11 +125,11 @@
   width: 85%;
   line-height: 35px;
   padding: 5px 10px 5px 10px;
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--highlight-color);
   border-radius: 10px;
   font-family: 'Lato', sans-serif;
   font-size: 15px;
-  color: var(--dark-blue);
+  color: var(--font-color);
 }
 
 .bubbles-container {
@@ -154,7 +154,7 @@
 }
 
 .right-text-bubble {
-  background: var(--primary-blue);
+  background: var(--bot-header-color);
 	color: white;
 	border-radius: 20px 20px 3px 20px;
 	display: block;
@@ -167,8 +167,8 @@
 }
 
 .left-text-bubble {
-	background: var(--secondary-blue);
-	color: var(--dark-blue);
+	background: var(--chat-bubble-color);
+	color: var(--font-color);
 	border-radius: 20px 20px 20px 3px;
 	display: block;
   max-width: 70%;
@@ -188,7 +188,7 @@
   margin: 5px 3px;
   padding: 10px;
   border-radius: 20px;
-  background: var(--primary-blue);
+  background: var(--bot-header-color);
   color: white;
   font-family: 'Lato', sans-serif;
   font-size: 15px;
