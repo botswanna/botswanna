@@ -50,7 +50,8 @@ const Bubble = {
     },
     // use showdown package markdown converter
     parseMarkdown: function() {
-      return converter.makeHtml(this.data.content)
+      const parsedContent = this.data.content.split('\n\n').filter((word) => word !== '').join('<br><br>')
+      return converter.makeHtml(parsedContent)
     }
   },
   template:
