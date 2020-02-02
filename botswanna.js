@@ -41,6 +41,10 @@ const Bubble = {
     isBotText: function() {
       return this.type === 'text' && this.data.bot === true
     },
+    parseNewLines: function() {
+      const parsedContent = this.data.content.split('\n').map((word) => word === '' ? '<br><br>' : word).join('')
+      return parsedContent
+    },
   },
   template:
 `
@@ -58,7 +62,7 @@ const Bubble = {
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
-          {{ data.content }}
+          <span v-html="parseNewLines"></span>
         </div>
       </div>
 
