@@ -37,6 +37,9 @@ const Bubble = {
     },
     iconURL: {
       type: String,
+    },
+    displayMarkdown: {
+      type: Boolean,
     }
   },
   computed: {
@@ -44,8 +47,7 @@ const Bubble = {
       return this.type === 'text' && this.data.bot === true
     },
     parseNewLines: function() {
-      // const parsedContent = this.data.content.split('\n').map((word) => word === '' ? '<br><br><br>' : word).join('')
-      const parsedContent = this.data.content.split('\n').filter((word) => word !== '').join('<br><br>')
+      const parsedContent = this.data.content.split('\n').filter((word) => word !== '').join('<br>')
       return parsedContent
     },
     // use showdown package markdown converter
@@ -56,18 +58,18 @@ const Bubble = {
       let isList = false
 
       // we only want to replace 
-      const parsedContent = splitContent.reduce((accum, curr, ix) => {
+      const parsedContent = splitContent.reduce((acc, curr, ix) => {
         let result
         if (ix === 0) {
-          result = accum + curr
+          result = acc + curr
         } else {
           if (curr[0] === '1' || curr[0] === '-') {
-            result = accum + `\n\n${curr}`
+            result = acc + `\n\n${curr}`
             isList = !isList
           } else {
             // only swap new line markers with break tags if two consecutive
             // text blocks are both NOT lists
-            result = isList ? accum + `\n\n${curr}` : accum + `<br><br>${curr}`
+            result = isList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
             isList = isList ? !isList : isList
           }
         }
@@ -92,7 +94,7 @@ const Bubble = {
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
-          <span v-html="data.displayMarkdown ? parseNewLines : parseMarkdown"></span>
+          <span v-html="displayMarkdown ? parseMarkdown : parseNewLines"></span>
         </div>
       </div>
 
@@ -203,9 +205,20 @@ const Botswanna = Vue.extend({
     this.scroll();
   },
   methods: {
-    sendMessage(type, data) {
+    sendMessage(type, data, multi=false) {
+      // the multi option allows you to decide whether you want to send a
+      // message with line breaks in it as multiple messages or as one message
+      if (multi) {
+        const { content } = data
+        const contentArr = content.split('\n\n').filter((phrase) => phrase !== '')
+        contentArr.filter((str) => str !== '').forEach((phrase) => this.bubbles.push({ type, data: {
+          content: phrase.trim(),
+          bot: true,
+        }}))
+      } else {
+        this.bubbles.push({ type, data })
+      }
       // Validate type and data
-      this.bubbles.push({ type, data })
     },
     removeMessage(index) {
       // Checking to ensure that remove acts within range of this.bubbles
@@ -280,6 +293,7 @@ const Botswanna = Vue.extend({
               :key="index"
               :bubbleIndex="index"
               :iconURL="iconURL"
+              :displayMarkdown="displayMarkdown"
               @button-click="_onButtonClick"
             ></bubble>
           </div>
