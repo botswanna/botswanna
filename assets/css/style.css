@@ -154,6 +154,10 @@
   margin: 5px 10px 0px 0px;
 }
 
+.text-bubble {
+  padding: 13px 13px 11px 13px;
+}
+
 .right-text-bubble {
   background: var(--bot-header-color);
 	color: white;
@@ -162,7 +166,6 @@
   max-width: 70%;
   float: right;
   clear: both;
-  padding: 13px;
   justify-content: flex-end;
   word-wrap: break-word;
 }
@@ -175,7 +178,6 @@
   max-width: 70%;
   float: left;
   clear: both;
-  padding: 13px;
   word-wrap: break-word;
 }
 
@@ -224,14 +226,17 @@
 div.text-bubble span p {
   margin: 0px;
   text-align: left;
+  font-size: 16px;
 }
 
 div.text-bubble span ol li {
   padding-left: 0.5em;
+  font-size: 15px;
 }
 
 div.text-bubble span ul li {
   padding-left: 0.5em;
+  font-size: 15px;
 }
 
 
