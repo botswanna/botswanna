@@ -42,7 +42,8 @@ const Bubble = {
       return this.type === 'text' && this.data.bot === true
     },
     parseNewLines: function() {
-      const parsedContent = this.data.content.split('\n').map((word) => word === '' ? '<br><br>' : word).join('')
+      // const parsedContent = this.data.content.split('\n').map((word) => word === '' ? '<br><br><br>' : word).join('')
+      const parsedContent = this.data.content.split('\n').filter((word) => word !== '').join('<br><br>')
       return parsedContent
     },
   },
