@@ -99,14 +99,14 @@
   border-top: 1px solid var(--highlight-color);
   bottom: 0px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px 15px 10px 15px;
 }
 
 .input-submit {
   padding: 7.5px;
-  width: 50px;
-  height: 50px;
+  width: 32px;
+  height: 32px;
 }
 
 .input-submit:hover {
