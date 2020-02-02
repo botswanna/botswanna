@@ -50,7 +50,29 @@ const Bubble = {
     },
     // use showdown package markdown converter
     parseMarkdown: function() {
-      const parsedContent = this.data.content.split('\n\n').filter((word) => word !== '').join('<br><br>')
+      const splitContent = this.data.content.split('\n\n')
+
+      // marker to keep track of whether the previous item is a list
+      let isList = false
+
+      // we only want to replace 
+      const parsedContent = splitContent.reduce((accum, curr, ix) => {
+        let result
+        if (ix === 0) {
+          result = accum + curr
+        } else {
+          if (curr[0] === '1' || curr[0] === '-') {
+            result = accum + `\n\n${curr}`
+            isList = !isList
+          } else {
+            // only swap new line markers with break tags if two consecutive
+            // text blocks are both NOT lists
+            result = isList ? accum + `\n\n${curr}` : accum + `<br><br>${curr}`
+            isList = isList ? !isList : isList
+          }
+        }
+        return result
+      }, '')
       return converter.makeHtml(parsedContent)
     }
   },
