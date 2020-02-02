@@ -30,7 +30,7 @@ const Bubble = {
     data: {
       type: Object,
     },
-    "bubble-index": {
+    bubbleIndex: {
       type: Number,
     },
     iconURL: {
@@ -76,7 +76,7 @@ const Bubble = {
           class="suggestion-btn"
           :key="index"
           :name="button.value"
-          @click="$emit('button-click', { value: button.value, index: bubble-index })"
+          @click="$emit('button-click', { value: button.value, index: bubbleIndex })"
         >
           {{ button.title }}
         </button>
@@ -244,7 +244,7 @@ const Botswanna = Vue.extend({
               :type="eachBubble.type"
               :data="eachBubble.data"
               :key="index"
-              :bubble-index="index"
+              :bubbleIndex="index"
               :iconURL="iconURL"
               @button-click="_onButtonClick"
             ></bubble>
