@@ -217,3 +217,13 @@
 .fade-leave-to {
   transform: translateX(10px);
 }
+
+/* text bubble text formatting */
+div.text-bubble span p {
+  margin: 0px;
+}
+
+div.text-bubble span ol li {
+  padding-left: 0.5em;
+}
+

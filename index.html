@@ -14,6 +14,7 @@
   <!-- Load Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuex"></script>
+  <script src="https://unpkg.com/showdown@1.9.1/dist/showdown.min.js"></script>
 </head>
 <body>
   <div id="botswanna"></div>
@@ -48,10 +49,10 @@
           { 
             type: 'text',
             data: {
-              content: `All travellers are advised to avoid travel to Hubei province in China and to defer all non-essential travel to Mainland China.\n All recent travellers to Hubei will be quarantined. These include:
+              content: `All travellers are advised to avoid travel to Hubei province in **China** and to defer all non-essential travel to Mainland China.\n All recent travellers to Hubei will be quarantined. These include:
 
-- Recent travellers to Hubei already in Singapore;
-- Returning residents of Singapore, or long-term pass holders with travel history to Hubei or with China passports issued in Hubei;
+1.  Recent travellers to Hubei already in Singapore;
+2.  Returning residents of Singapore, or long-term pass holders with travel history to Hubei or with China passports issued in Hubei;
 
 There are severe penalties for not complying with quarantine orders.`,
               bot: true, 

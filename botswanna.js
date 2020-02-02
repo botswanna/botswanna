@@ -1,3 +1,5 @@
+const converter = new showdown.Converter()
+
 const BotHeader = {
   props: ['name'],
   template:
@@ -46,6 +48,10 @@ const Bubble = {
       const parsedContent = this.data.content.split('\n').filter((word) => word !== '').join('<br><br>')
       return parsedContent
     },
+    // use showdown package markdown converter
+    parseMarkdown: function() {
+      return converter.makeHtml(this.data.content)
+    }
   },
   template:
 `
@@ -63,7 +69,7 @@ const Bubble = {
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
-          <span v-html="parseNewLines"></span>
+          <span v-html="data.displayMarkdown ? parseNewLines : parseMarkdown"></span>
         </div>
       </div>
 
@@ -145,6 +151,10 @@ const Botswanna = Vue.extend({
       type: String,
       default: 'Botswanna',
     },
+    useMarkdown: {
+      type: Boolean,
+      default: true,
+    },
     iconURL: {
       type: String,
       default: 'https://answerbot.s3-ap-southeast-1.amazonaws.com/botswanna/botswanna-icon.svg',
@@ -163,6 +173,7 @@ const Botswanna = Vue.extend({
       name: this.initName,
       bubbles: this.initBubbles,
       displayChat: false,
+      displayMarkdown: this.useMarkdown,
     };
   },
   updated() {
