@@ -107,6 +107,7 @@
   padding: 7.5px;
   width: 32px;
   height: 32px;
+  min-height: 0;
 }
 
 .input-submit:hover {
@@ -129,11 +130,12 @@
   font-family: 'Lato', sans-serif;
   font-size: 15px;
   color: var(--font-color);
+  min-height: 0;
 }
 
 .bubbles-container {
   flex-grow: 1;
-  margin: 15px;
+  margin: 5px;
   display: block;
   overflow-y: scroll;
   max-height: 95%;
@@ -141,15 +143,15 @@
 
 .bubble .text-bubble-container {
   display: flex;
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
+  margin-top: 7.5px !important;
+  margin-bottom: 7.5px !important;
   padding: 2px 0px 2px 0px;
 }
 
 .bot-prof-icon {
-  height: 30px;
-  width: 30px;
-  margin: 15px 5px 0px 0px;
+  height: 40px;
+  width: 40px;
+  margin: 5px 10px 0px 0px;
 }
 
 .right-text-bubble {
@@ -221,6 +223,7 @@
 /* text bubble text formatting */
 div.text-bubble span p {
   margin: 0px;
+  text-align: left;
 }
 
 div.text-bubble span ol li {
