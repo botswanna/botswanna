@@ -57,22 +57,32 @@ const Bubble = {
       // marker to keep track of whether the previous item is a list
       let isList = false
 
-      // we only want to replace 
+      // logic for rendering blocks - the if statements contain the
+      // cases
       const parsedContent = splitContent.reduce((acc, curr, ix) => {
+        const blockStartsWithList = curr[0] === '1' || curr[0] === '-'
+        const blockContainsList = curr.split('\n').filter((phrase) => phrase !== '').reduce((acc, curr) => {
+          if (curr[0] === '1' || curr[0] === '-') {
+            return true
+          }
+          return acc === true ? true : false
+        }, false)
+
         let result
         if (ix === 0) {
           result = acc + curr
         } else {
-          if (curr[0] === '1' || curr[0] === '-') {
-            result = acc + `\n\n${curr}`
-            isList = !isList
+          if (blockContainsList) {
+            result = blockStartsWithList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
+            isList = true
           } else {
             // only swap new line markers with break tags if two consecutive
             // text blocks are both NOT lists
-            result = acc + `\n\n${curr}`
-            isList = isList ? !isList : isList
+            result = isList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
+            isList = false
           }
         }
+        prevBlockStartList = blockStartsWithList
         return result
       }, '')
       return converter.makeHtml(parsedContent)
