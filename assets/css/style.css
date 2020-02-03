@@ -154,6 +154,7 @@
 
 .text-bubble {
   padding: 13px;
+  line-height: normal !important;
 }
 
 .right-text-bubble {
