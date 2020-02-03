@@ -156,6 +156,10 @@
   padding: 13px;
 }
 
+div.text-bubble span p {
+  line-height: normal;
+}
+
 .right-text-bubble {
   background: var(--bot-header-color);
 	color: white;
