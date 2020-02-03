@@ -69,7 +69,7 @@ const Bubble = {
           } else {
             // only swap new line markers with break tags if two consecutive
             // text blocks are both NOT lists
-            result = isList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
+            result = acc + `\n\n${curr}`
             isList = isList ? !isList : isList
           }
         }
