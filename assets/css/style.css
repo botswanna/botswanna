@@ -99,7 +99,7 @@
   border-top: 1px solid var(--highlight-color);
   bottom: 0px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 10px 15px 10px 15px;
 }
 
@@ -135,7 +135,7 @@
 
 .bubbles-container {
   flex-grow: 1;
-  margin: 5px;
+  margin: 5px 15px;
   display: block;
   overflow-y: scroll;
   max-height: 95%;
@@ -151,7 +151,7 @@
 .bot-prof-icon {
   height: 40px;
   width: 40px;
-  margin: 5px 10px 0px 0px;
+  margin: 5px 5px 0px 0px;
 }
 
 .text-bubble {
