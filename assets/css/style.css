@@ -16,9 +16,9 @@
   width: 500px;
   height: 650px;
   /* Max height = 100vh - 2*bottom_distance - 2*margin */
-  max-height: calc(100vh - 10px - 30px); 
+  max-height: calc(100% - 10px - 30px); 
   /* Max width = 100vw - 2*right_distance - 2*margin */
-  max-width: calc(100vw - 10px - 30px); 
+  max-width: calc(100% - 10px - 30px); 
   z-index: 1000;
   right: 5px;
   left: auto;
