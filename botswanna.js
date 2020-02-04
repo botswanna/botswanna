@@ -104,7 +104,7 @@ const Bubble = {
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
-          <span v-html="displayMarkdown ? parseMarkdown : parseNewLines"></span>
+          <span v-html="(displayMarkdown && data.bot) ? parseMarkdown : parseNewLines"></span>
         </div>
       </div>
 
