@@ -207,7 +207,7 @@ const Botswanna = Vue.extend({
       callback: '',
       name: this.initName,
       bubbles: this.initBubbles,
-      displayChat: false,
+      displayChat: true,
       displayMarkdown: this.useMarkdown,
     };
   },
