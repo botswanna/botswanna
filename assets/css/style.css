@@ -243,4 +243,19 @@ div.text-bubble span ul li {
   font-size: 15px;
 }
 
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+    height: 100%;
+  }
 
+  .chat {
+    border-radius: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chat-header {
+    border-radius: 0px;
+  }
+}
