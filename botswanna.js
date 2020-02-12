@@ -3,7 +3,7 @@ const converter = new showdown.Converter()
 const BotHeader = {
   props: ['name'],
   template:
-  ` 
+    ` 
     <div class="chat-header">
       <div class="chat-expand">
       </div>
@@ -43,15 +43,15 @@ const Bubble = {
     }
   },
   computed: {
-    isBotText: function() {
+    isBotText: function () {
       return this.type === 'text' && this.data.bot === true
     },
-    parseNewLines: function() {
+    parseNewLines: function () {
       const parsedContent = this.data.content.split('\n').filter((word) => word !== '').join('<br>')
       return parsedContent
     },
     // use showdown package markdown converter
-    parseMarkdown: function() {
+    parseMarkdown: function () {
       const splitContent = this.data.content.split('\n\n')
 
       // marker to keep track of whether the previous item is a list
@@ -89,7 +89,7 @@ const Bubble = {
     }
   },
   template:
-`
+    `
     <div class="bubble">
       <div
         class="text-bubble-container"
@@ -104,7 +104,8 @@ const Bubble = {
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
-          <span v-if="displayMarkdown && data.bot" v-html="parseMarkdown"></span>
+          <span v-if="displayMarkdown && data.bot && !data.isTyping" v-html="parseMarkdown"></span>
+          <span v-if="data.bot && data.isTyping" class="loading" style="font-style:italic; padding-right:0.5em;">{{data.content}}</span>
           <span v-if="!(displayMarkdown && data.bot)">
             <p>{{parseNewLines}}</p>
           </span>
@@ -141,7 +142,7 @@ const BotTextInput = {
     }
   },
   template:
-  `
+    `
     <div class="input-box">
         <input
           class="chat-input"
@@ -169,7 +170,7 @@ const BotMinimized = {
     }
   },
   template:
-  `
+    `
     <div
       class="chat-minimized"
     >
@@ -204,30 +205,47 @@ const Botswanna = Vue.extend({
     'bot-text-input': BotTextInput,
     'bot-minimized': BotMinimized,
   },
-  data: function() {
-    return { 
+  data: function () {
+    return {
       message: '',
       callback: '',
       name: this.initName,
       bubbles: this.initBubbles,
       displayChat: true,
       displayMarkdown: this.useMarkdown,
+      isTypingBubble: {
+        type: 'text',
+        data: {
+          bot: true,
+          content: this.initName + ' is typing',
+          isTyping: true,
+        }
+      }
     };
+  },
+  computed: {
+    isTyping: function () {
+      // Get last message in array, check if its not written by the bot
+      // Future: Get this as a prop passed down by user during async call to dialogflow
+      return this.bubbles.slice(-1)[0].data.bot === false
+    },
   },
   updated() {
     this.scroll();
   },
   methods: {
-    sendMessage(type, data, multi=false) {
+    sendMessage(type, data, multi = false) {
       // the multi option allows you to decide whether you want to send a
       // message with line breaks in it as multiple messages or as one message
       if (multi) {
         const { content } = data
         const contentArr = content.split('\n\n').filter((phrase) => phrase !== '')
-        contentArr.filter((str) => str !== '').forEach((phrase) => this.bubbles.push({ type, data: {
-          content: phrase.trim(),
-          bot: true,
-        }}))
+        contentArr.filter((str) => str !== '').forEach((phrase) => this.bubbles.push({
+          type, data: {
+            content: phrase.trim(),
+            bot: true,
+          }
+        }))
       } else {
         this.bubbles.push({ type, data })
       }
@@ -263,7 +281,6 @@ const Botswanna = Vue.extend({
         const type = 'text'
         this.sendMessage(type, data)
         this.callback({ value, trigger: 'text' })
-  
         // Delete value from input
         this.message = ''
       }
@@ -283,7 +300,7 @@ const Botswanna = Vue.extend({
     window.removeEventListener('resize', this.scroll);
   },
   template:
-  `
+    `
     <div class="container">
       <!-- Add Botswanna container -->
       <transition name="fade">
@@ -308,6 +325,13 @@ const Botswanna = Vue.extend({
               :iconURL="iconURL"
               :displayMarkdown="displayMarkdown"
               @button-click="_onButtonClick"
+            ></bubble>
+            <bubble
+              v-if="isTyping"
+              :type="isTypingBubble.type"
+              :data="isTypingBubble.data"
+              :iconURL="iconURL"
+              :displayMarkdown="displayMarkdown"
             ></bubble>
           </div>
           <!-- text input box -->
