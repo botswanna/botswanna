@@ -55,7 +55,7 @@ const Bubble = {
       const splitContent = this.data.content.split('\n\n')
 
       // marker to keep track of whether the previous item is a list
-      let isList = false
+      let wasList = false
 
       // logic for rendering blocks - the if statements contain the
       // cases
@@ -71,15 +71,20 @@ const Bubble = {
         let result
         if (ix === 0) {
           result = acc + curr
+          if (blockContainsList) {
+            wasList = true
+          }
         } else {
           if (blockContainsList) {
-            result = blockStartsWithList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
-            isList = true
+            result = blockStartsWithList ?
+              acc + `\n\n${curr}` :
+              (wasList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`)
+            wasList = true
           } else {
             // only swap new line markers with break tags if two consecutive
             // text blocks are both NOT lists
-            result = isList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
-            isList = false
+            result = wasList ? acc + `\n\n${curr}` : acc + `<br><br>${curr}`
+            wasList = false
           }
         }
         return result
