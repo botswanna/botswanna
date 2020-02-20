@@ -104,8 +104,15 @@ const Bubble = {
         <div
           :class="['text-bubble', data.bot ? 'left-text-bubble' : 'right-text-bubble']"
         >
-          <span v-if="displayMarkdown && data.bot" v-html="parseMarkdown"></span>
-          <span v-if="!(displayMarkdown && data.bot)">
+          <span
+            v-if="displayMarkdown && data.bot"
+            v-html="parseMarkdown"
+            class="text-bubble-content-container"
+          ></span>
+          <span
+            v-if="!(displayMarkdown && data.bot)"
+            class="text-bubble-content-container"
+          >
             <p>{{parseNewLines}}</p>
           </span>
         </div>
@@ -124,6 +131,25 @@ const Bubble = {
         >
           {{ button.title }}
         </button>
+      </div>
+
+      <div
+        v-else-if="type === 'linkout'"
+        class="linkout-btn-container"
+      >
+        <div
+          class="linkout-btn"
+          @click="$emit('linkout-click', { url: data.url })"
+        >
+          <p class="linkout-content">
+            {{ data.title }}
+          </p>
+          <svg class="linkout-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+            <path d="M18 19H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h5c.55 0 1-.45 1-1s-.45-1-1-1H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6c0-.55-.45-1-1-1s-1 .45-1 1v5c0 .55-.45 1-1 1zM14 4c0 .55.45 1 1 1h2.59l-9.13 9.13c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L19 6.41V9c0 .55.45 1 1 1s1-.45 1-1V4c0-.55-.45-1-1-1h-5c-.55 0-1 .45-1 1z">
+            </path>
+          </svg>
+          </img>
+        </div>
       </div>
     </div>
   `,
@@ -196,7 +222,11 @@ const Botswanna = Vue.extend({
     iconURL: {
       type: String,
       default: '/assets/botswanna-icon.svg',
-    }
+    },
+    display: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     'bot-header': BotHeader,
@@ -210,7 +240,7 @@ const Botswanna = Vue.extend({
       callback: '',
       name: this.initName,
       bubbles: this.initBubbles,
-      displayChat: true,
+      displayChat: this.display,
       displayMarkdown: this.useMarkdown,
     };
   },
@@ -251,6 +281,12 @@ const Botswanna = Vue.extend({
       this.removeMessage(index)
       this.sendMessage(type, data)
       this.callback({ value, trigger: 'button' })
+    },
+    async _onLinkoutClick(eventObject) { {
+      const { url } = eventObject
+      window.open(url, '_blank')
+    }
+      
     },
     async _onInputSubmit() {
       // prevent submission of empty messages
@@ -308,6 +344,7 @@ const Botswanna = Vue.extend({
               :iconURL="iconURL"
               :displayMarkdown="displayMarkdown"
               @button-click="_onButtonClick"
+              @linkout-click="_onLinkoutClick"
             ></bubble>
           </div>
           <!-- text input box -->
