@@ -82,7 +82,6 @@ const Bubble = {
             isList = false
           }
         }
-        prevBlockStartList = blockStartsWithList
         return result
       }, '')
       return converter.makeHtml(parsedContent)
