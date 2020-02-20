@@ -156,7 +156,7 @@
   padding: 13px;
 }
 
-div.text-bubble span p {
+.text-bubble-content-container > p {
   line-height: normal;
 }
 
@@ -183,13 +183,14 @@ div.text-bubble span p {
   word-wrap: break-word;
 }
 
-.suggestion-btn-container {
+.suggestion-btn-container, .linkout-btn-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
-.suggestion-btn {
+.suggestion-btn, .linkout-btn {
   margin: 5px 10px;
   padding: 15px;
   border-radius: 20px;
@@ -202,6 +203,11 @@ div.text-bubble span p {
   outline: none;
 }
 
+.linkout-btn {
+  display: flex;
+  align-items: center;
+}
+
 .suggestion-btn:hover {
   filter: brightness(120%);
   -webkit-filter: brightness(120%);
@@ -211,6 +217,30 @@ div.text-bubble span p {
   -ms-transition: all 0s ease;
   transition: all 0s ease;
   cursor: pointer;
+}
+
+.linkout-btn:hover{
+  transform: translateY(-2px);
+  filter: brightness(120%);
+  -webkit-filter: brightness(120%);
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+p .linkout-content {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.linkout-icon {
+  height: 1.25em;
+  width: 1.25em;
+  margin-left: 5px;
+  fill: #ffffff;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -227,20 +257,36 @@ div.text-bubble span p {
 }
 
 /* text bubble text formatting */
-div.text-bubble span p {
+.text-bubble-content-container > p {
   margin: 0px;
   text-align: left;
   font-size: 16px;
 }
 
-div.text-bubble span ol li {
+.text-bubble-content-container > ol {
   padding-left: 0.5em;
   font-size: 15px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  line-height: 1.25em;
+  padding-inline-start: 40px;
 }
 
-div.text-bubble span ul li {
+.text-bubble-content-container ul {
   padding-left: 0.5em;
   font-size: 15px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  line-height: 1.25em;
+  padding-inline-start: 40px;
+}
+
+.text-bubble-content-container  li {
+  margin: 0.75em;
+}
+
+.text-bubble-content-container  a {
+  color: var(--bot-header-color);
 }
 
 @media only screen and (max-width: 600px) {
@@ -253,6 +299,12 @@ div.text-bubble span ul li {
     border-radius: 0px;
     width: 100%;
     height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
   }
 
   .chat-header {
