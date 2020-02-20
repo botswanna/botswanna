@@ -16,7 +16,7 @@ const BotHeader = {
       <div class="chat-close">
         <img
           class="chat-close-icon"
-          src="/assets/chat-close-icon.svg"
+          src="https://botswanna.dev/assets/chat-close-icon.svg"
           @click="$emit('toggle-display')"
         >
       </div>
@@ -180,7 +180,7 @@ const BotTextInput = {
       <div class="input-submit">
         <img
           class="input-submit-icon"
-          src="/assets/input-submit-icon.svg"
+          src="https://botswanna.dev/assets/input-submit-icon.svg"
           @click="$emit('input-submit')"
         >
       </div>
@@ -221,7 +221,7 @@ const Botswanna = Vue.extend({
     },
     iconURL: {
       type: String,
-      default: '/assets/botswanna-icon.svg',
+      default: 'https://botswanna.dev/assets/botswanna-icon.svg',
     },
     display: {
       type: Boolean,
