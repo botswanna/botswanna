@@ -265,24 +265,30 @@ p .linkout-content {
 
 .text-bubble-content-container > ol {
   padding-left: 0.5em;
-  font-size: 15px;
   margin-block-start: 1em;
   margin-block-end: 1em;
-  line-height: 1.25em;
   padding-inline-start: 40px;
 }
 
-.text-bubble-content-container ul {
+.text-bubble-content-container > ul {
   padding-left: 0.5em;
-  font-size: 15px;
   margin-block-start: 1em;
   margin-block-end: 1em;
-  line-height: 1.25em;
   padding-inline-start: 40px;
 }
 
-.text-bubble-content-container  li {
+.text-bubble-content-container li {
   margin: 0.75em;
+  font-size: 15px;
+  line-height: 1.25em;
+}
+
+.text-bubble-content-container > ol > li {
+  list-style-type: decimal;
+}
+
+.text-bubble-content-container > ul > li {
+  list-style-type: disc;
 }
 
 .text-bubble-content-container  a {
