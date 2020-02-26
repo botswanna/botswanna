@@ -169,7 +169,7 @@
   float: right;
   clear: both;
   justify-content: flex-end;
-  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .left-text-bubble {
@@ -180,7 +180,7 @@
   max-width: 70%;
   float: left;
   clear: both;
-  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .suggestion-btn-container, .linkout-btn-container {
